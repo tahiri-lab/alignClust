@@ -4,6 +4,21 @@ import argparse
 from prepare_data import read_fasta
 
 
+def get_dissimilarity_matrix(filepath):
+
+    # Getting the dataframe from the Fasta file
+    data = read_fasta(filepath)
+
+    # Initialization of the dissimilarity matrix
+    sequences_number = data.shape[0]
+    matrix = np.empty([sequences_number, sequences_number])
+
+    # Computing the dissimilarity matrix by looping over sequences two by two
+    for i in range(0, sequences_number):
+        for j in range(0, sequences_number):
+            matrix[i][j] = dissimilarity_score_between_two_sequences(data.iloc[i]['sequence'], data.iloc[j]['sequence']
+                                                                     , 'Constant')
+    return matrix
 def dissimilarity_score_between_two_sequences(a, b, gap_penalty_type):
     parser = argparse.ArgumentParser()
     parser.add_argument('gap_penalty_type',
@@ -38,27 +53,8 @@ def dissimilarity_score_between_two_sequences(a, b, gap_penalty_type):
     return score
 
 
-def get_dissimilarity_matrix(filepath):
-    """
-
-    :rtype: object
-    """
-    # Getting the dataframe from the Fasta file
-    data = read_fasta(filepath)
-
-    # Initialization of the dissimilarity matrix
-    sequences_number = data.shape[0]
-    matrix = np.empty([sequences_number, sequences_number])
-
-    # Computing the dissimilarity matrix by looping over sequences two by two
-    for i in range(0, sequences_number):
-        for j in range(0, sequences_number):
-            matrix[i][j] = dissimilarity_score_between_two_sequences(data.iloc[i]['sequence'], data.iloc[j]['sequence']
-                                                                                   , 'Constant')
-    print(matrix)
-    return matrix
-
-
 # Testing the matrix_of_dissimilarity() function
+'''
 dissimilarity_matrix = get_dissimilarity_matrix('input\\2_aligned\\2\'-5\'_RNA_ligase.fasta')
 print(dissimilarity_matrix)
+'''

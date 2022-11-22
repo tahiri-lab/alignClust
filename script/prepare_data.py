@@ -34,20 +34,7 @@ def read_fasta(file_path):
 
 
 # Testing the read_fasta() function
+'''
 data = read_fasta('input\\2_aligned\\2\'-5\'_RNA_ligase.fasta')
 print(data)
-
-
-
-
-
-
-
-
-# sequence1 = data.iloc[0]['sequence']
-# sequence2 = data.iloc[1]['sequence']
-
-# print(similar(sequence1, sequence2))
-
-#print(data.iloc[1]['id'])
-#print(data.iloc[2]['id'])
+'''
